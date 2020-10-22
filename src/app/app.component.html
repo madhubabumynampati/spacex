@@ -1,0 +1,59 @@
+<header>
+    <h2 class="ml-4">SpaceX Launch Programs</h2>
+</header>
+<div class="row m-0">
+    <div class="col-md-2 mt-2">
+        <aside class="card">
+            <h5 class="ml-2">Filters</h5>
+            <div class="filerHeader mt-4">Launch Year</div>
+            <div class="row m-0">
+                <div class="col-6  mt-2 text-center" *ngFor="let year of years">
+                    <button class="btn btn-success" [ngClass]="{'active':filter.launch_year==year}" (click)="filter.launch_year=year;getFilterAll()">{{year}}</button>
+                </div>
+            </div>
+            <div class="filerHeader mt-4">Successful Launch</div>
+            <div class="row m-0">
+                <div class="col-6  mt-2 text-center">
+                    <button class="btn btn-success" [ngClass]="{'active':filter.launch_success}" (click)="filter.launch_success=true;getFilterAll()">True</button>
+                </div>
+                <div class="col-6  mt-2 text-center">
+                    <button class="btn btn-success" [ngClass]="{'active':filter.launch_success===false}" (click)="filter.launch_success=false;getFilterAll()">False</button>
+                </div>
+            </div>
+            <div class="filerHeader mt-4">Successful Landing</div>
+            <div class="row m-0">
+                <div class="col-6  mt-2 text-center">
+                    <button class="btn btn-success" [ngClass]="{'active':filter.land_success}" (click)="filter.land_success=true;getFilterAll()">True</button>
+                </div>
+                <div class="col-6  mt-2 text-center">
+                    <button class="btn btn-success" [ngClass]="{'active':filter.land_success===false}" (click)="filter.land_success=false;getFilterAll()">False</button>
+                </div>
+            </div>
+        </aside>
+    </div>
+    <div class="col-md-10">
+        <div class="row m-0">
+            <div class="col-md-3 col-sm-6 mt-2" *ngFor="let spacexLaunch of spacexLaunches">
+                <div class="card">
+                    <img class="card-img-top" [src]="spacexLaunch.links?.mission_patch">
+                    <div class="card-body">
+                        <h5 class="card-title">{{spacexLaunch.mission_name}} # {{spacexLaunch.flight_number}}</h5>
+                        <h5 class="card-title">Mission Ids:</h5>
+                        <ul>
+                            <li *ngFor=" let id of spacexLaunch.mission_id">{{id}}</li>
+                        </ul>
+                        <h5 class="card-title">Launch Year: {{spacexLaunch.launch_year}}</h5>
+                        <h5 class="card-title">Successful Launch: {{spacexLaunch.launch_success?'Yes':'No'}}</h5>
+                        <h5 class="card-title">Successful Landing: {{spacexLaunch.rocket?.first_stage?.cores[0]?.land_success?'Yes':'No'}}</h5>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="footer text-center">
+        <b>Developed By : </b><i>Madhubabu Mynampati</i>
+    </div>
+</footer>
